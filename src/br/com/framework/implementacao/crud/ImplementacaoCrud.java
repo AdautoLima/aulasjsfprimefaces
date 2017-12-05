@@ -70,19 +70,14 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
         this.simpleJdbcTemplate = simpleJdbcTemplate;
     }
 
-   
-    
-    
-    
-    
+       
     // Roda instantaneamente o SQL no banco de dados.
     // Sem isso o comando fica em cash, só executa no fim da session.
     public void executeFlushSession() {
         sessionFactory.getCurrentSession().flush();
     }
     
-    
-    
+        
     @Override
     public void save(T obj) throws Exception {
         validarSessionFactory();
@@ -224,12 +219,23 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 
     @Override
     public Query obterQuery(String query) throws Exception {      
-        return null;
+        validarSessionFactory();
+        Query queryReturn = sessionFactory.getCurrentSession().createQuery(query.toString());
+        
+        return queryReturn;
     }
-
+    
+    // Realiza consulta no banco de dados, iniciando o carregamento a partir do
+    // registro passado no parametro --> iniciaNoRegistro e obtendo o máximo de
+    // resultados passados em --> maximoResultado    
     @Override
     public List<T> findListByQueryDinamica(String query, int iniciaNoRegistro, int maximoResultado) throws Exception {       
-        return null;
+        validarSessionFactory();
+        List<T> lista = new ArrayList<T>();
+        lista = sessionFactory.getCurrentSession().createQuery(query).setFirstResult(iniciaNoRegistro)
+                .setMaxResults(maximoResultado).list();
+        
+        return lista;
     }
     
     public List<Object[]> getListSQLDinamicaArray(String sql) throws Exception {
