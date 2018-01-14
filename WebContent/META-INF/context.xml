@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context reloadable="true">
     <Resource   
-                name="jdbc/datasouce" 
+                name="jdbc/datasource" 
                 auth="Container" 
                 type="javax.sql.DataSource"
                 defaultAutoCommit='false'
@@ -18,7 +18,7 @@
                 minEvictableIdleTimeMillis="60000"
                 antiJARLocking="false"
                 antiResourceLocking="false"
-                username="caixaki" 
+                username="admin" 
                 password="admin" 
                 url="jdbc:postgresql://localhost:5432/ebook_jee?autoReconnect=true"/>
 <!-- Classe do tomcat que está lendo esse arquivo é org.apache.tomcat.dbcp.dbcp.PoolingDataSource -->               
